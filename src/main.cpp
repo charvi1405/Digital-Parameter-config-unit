@@ -1,5 +1,5 @@
 #include <Arduino.h>
-#include <wire.h>
+#include <Wire.h>
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
 
@@ -8,9 +8,13 @@
 #define OLED_ADDR 0x3C
 
 // Create display object
-Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &amp;Wire, -1);
+Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, -1);
 void setup() {
-// write your initialization code here
+    // Initialize I2C OLED
+    if (!display.begin(SSD1306_SWITCHCAPVCC, OLED_ADDR)) {
+        Serial.println(&quot;OLED not found&quot;);
+        while (true);
+    }
 }
 
 void loop() {
