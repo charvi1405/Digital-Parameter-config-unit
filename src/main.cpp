@@ -10,11 +10,17 @@
 // Create display object
 Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, -1);
 void setup() {
+    Serial.begin(9600);
     // Initialize I2C OLED
     if (!display.begin(SSD1306_SWITCHCAPVCC, OLED_ADDR)) {
-        Serial.println(&quot;OLED not found&quot;);
+        Serial.println("OLED not found");
         while (true);
     }
+    display.clearDisplay();
+
+    // Set text properties
+    display.setTextSize(1);
+    display.setTextColor(SSD1306_WHITE);
 }
 
 void loop() {
